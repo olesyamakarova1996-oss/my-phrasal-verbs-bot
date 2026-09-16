@@ -4,7 +4,7 @@ const fs = require('fs');
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const { JWT } = require('google-auth-library');
 
-const bot = new Telegraf('7922896296:AAFhM1DgwogtgfalIu-M3WDD24-2XavqYxY'); 
+const bot = new Telegraf(process.env.BOT_TOKEN); 
 const CHANNEL_ID = '@phrasal_verbs_ok'; 
 
 // !!! СЮДА ВСТАВЬТЕ ID ВАШЕЙ GOOGLE ТАБЛИЦЫ !!!
