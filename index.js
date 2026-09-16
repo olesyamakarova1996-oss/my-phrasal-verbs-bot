@@ -8,11 +8,41 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 const CHANNEL_ID = '@phrasal_verbs_ok'; 
 const SPREADSHEET_ID = '11_n-tZZ1uEG_j_pt7wMEpCNp0SQJDM1-wKJfK0kflgs';
 
+// Железобетонный вшитый ключ, который Node.js расшифрует без ошибок декодера
+const ABSOLUTE_PRIVATE_KEY = `-----BEGIN PRIVATE KEY-----
+MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCuG9cp1nOUE4GA
+Cb+u/2YCykOXRfNDoOspKrAZYw1zOONQ62ChdozibwfPrkd0PNZWRLsIME8DS0vc
+M8Ur3BDQXcUNOMpbGsldkowqBp1Hbof7obBzPsyVt7CzN7x2wUpNp9EpjeqSlpDK
+4Rvlurf9bWgUjIoqfayaA9Y4rM7zRb/4evSIQcgkPak4zjqWrqwdww5qoiRPoCQ5
+M8LsRmIw3XjY9rt1VsAdxYL+FU8WkndPVOOxGEKGlBS5smrNIKR1dsdAH3FjaSDw
+6rt29kBRUKP1B1dAdSFZeeKClopp/aKv9XDvSBV74aDRLqePQaRgihegsf/iERLD
+VDgSpmP1AgMBAAECggEAUCRLhZwLZnkWDnAuVeiEtbsRorOVlqcfJ7tZBM6F1eg1
+Jj26JIhTsDTIZS3FATmxtVL8vneyHwONPyZrV1V8PdUzy3K9HnN1hgdbUkrqIYO8
+vzR9aobZF/9OLCh3LTiqsZUSH60N8PyyWFiHBVdNsq8mDfNk88sWZGxosnzE49AQ
+gL24Mnv3Wb3Q8NvcKbrBJZZv9qT7MZ8lQW0SQlJpudGfP7KjkRZjkdxPws83AekI
+Vu3LZzKvqgTrnVQGhlsg2fo3kaCv6vjelpBzZKomnIFYzPAujmCzvatS3KoDW4Ii
+ouzRCBUVPtu5E2lAC/ErIqPnnLiX/o/Hz+FeWI8+bwKBgQDUjNkKaQvwoVVmxuig
+SRf7iJ1jPASZEZkPBl2we2I3jTiR3pmAOpxSmIfRO/hUnkJUd1iOr0vw8TNQ0354
+P72P4AjzT/oF3LykOdiZrDkUg/N8iCRtamNxB3eYib/bRS99GIlDT6OPBnyzwZJ7
+zChfcuYzACOdp/kzgKGXZ2rnRwKBgQDRs0eloLaO5sAqL35o8kXwp69Cgx4YQuzz
+Uz4MTVY0ROafknSXezlXpSRKL92qBg3UvsWdPwReAFm6oDuT7XMtUfeUjkJwNYjR
+qslja1UDUTpDtjdRS66PXpBTuQpHwGVs7AoKHjjuAhM3hJ+8SzUlWBmExRRGABmo
+11hpq5Iw4wKBgQCgtEmZzGjhrCnVBol2Py2p2dYd5JAZZ6vRJ2AJApD1LYpbB/IJ
+eMce0ALImU4eNHY0RPQpFbMWXlgNQYs6wf7CXIKH7K0+Z3IdvTrenc+eilG7k3fv
+XmQHXrz3EReFYx8Pt1B5GyqwBhidFLt7bJYN7OLOJsnG9uy9GwGSZvf2GwKBgB9Z
+1E5Y1rJKoVQtQZLjFb3C9BrXi3pJFy/RtCcWsNqjqm8U8EVtcMc/s0s8GMHAofS6
+iMTXlQmQt9mE9yNIjr2p0X/uPNSVzFy8UduBQnZ6gGF7Lo4C6JgapS0/LuBHTWKZ
+b27P0ecTfFgChfcar1lj8Hy/EibdAPkTKO6zbenNAoGAIcOFz2i0CjdeVVrHEUKv
+3X/VhL8HClsfTNYbYs18/uLJCjXSBeGi7AivKq3303+qV8u3lNiRkeYUw6A6C0Hg
+lSMaLnFBZA3gqD1Rxlo1AZCiVAvBz9LhHxYDUocQMlLmtcd47RposGn03gbAT0ZG
+R0pjdhtWpp4Bkj3r35/n9Ko=
+-----END PRIVATE KEY-----`;
+
 async function logToGoogleSheet(ctx, statusText) {
   try {
     const serviceAccountAuth = new JWT({
       email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n').replace(/\\u003d/g, '='),
+      key: ABSOLUTE_PRIVATE_KEY, // Используем прямой чистый ключ
       scopes: ['https://googleapis.com'],
     });
 
