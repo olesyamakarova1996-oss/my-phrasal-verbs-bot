@@ -15,7 +15,8 @@ async function logToGoogleSheet(ctx, statusText) {
   try {
     const serviceAccountAuth = new JWT({
       email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'), // Исправление переносов строк для Render
+      key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n').replace(/\\u003d/g, '='),
+ // Исправление переносов строк для Render
       scopes: ['https://googleapis.com'],
     });
 
